@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<edges>
+
+    <!-- North → Center -->
+    <edge id="north_to_center"
+          from="north"
+          to="center"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- Center → North -->
+    <edge id="center_to_north"
+          from="center"
+          to="north"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- South → Center -->
+    <edge id="south_to_center"
+          from="south"
+          to="center"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- Center → South -->
+    <edge id="center_to_south"
+          from="center"
+          to="south"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- East → Center -->
+    <edge id="east_to_center"
+          from="east"
+          to="center"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- Center → East -->
+    <edge id="center_to_east"
+          from="center"
+          to="east"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- West → Center -->
+    <edge id="west_to_center"
+          from="west"
+          to="center"
+          numLanes="2"
+          speed="13.9"/>
+
+    <!-- Center → West -->
+    <edge id="center_to_west"
+          from="center"
+          to="west"
+          numLanes="2"
+          speed="13.9"/>
+
+</edges>

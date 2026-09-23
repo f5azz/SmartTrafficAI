@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Flutter / Dart
+frontend/.dart_tool/
+frontend/build/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.metadata
+frontend/pubspec.lock
+frontend/.packages
+frontend/.idea/
+
+# Firebase / generated
+frontend/android/app/google-services.json
+frontend/android/local.properties
+
+# SUMO / dataset artifacts
+backend/videos/
+backend/**/*.pyc
+backend/**/*.pkl
+backend/*.pt
+
+# Git
+*.log

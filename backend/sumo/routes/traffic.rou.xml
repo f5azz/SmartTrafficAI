@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes>
+
+    <!-- ========================= -->
+    <!-- VEHICLE TYPE -->
+    <!-- ========================= -->
+
+    <vType id="car"
+           accel="2.6"
+           decel="4.5"
+           sigma="0.5"
+           length="5"
+           minGap="2.5"
+           maxSpeed="13.9"
+           guiShape="passenger"/>
+
+        <!-- ========================= -->
+    <!-- EMERGENCY VEHICLE TYPE -->
+    <!-- ========================= -->
+
+    <vType id="emergency"
+           accel="3.0"
+           decel="5.0"
+           sigma="0.2"
+           length="5.5"
+           minGap="2.0"
+           maxSpeed="16.0"
+           guiShape="emergency"/>
+
+
+    <!-- ========================= -->
+    <!-- NORTH APPROACH -->
+    <!-- ========================= -->
+
+    <!-- North -> South : STRAIGHT -->
+    <route id="north_south"
+           edges="north_to_center center_to_south"/>
+
+    <!-- North -> East : RIGHT TURN -->
+    <route id="north_east"
+           edges="north_to_center center_to_east"/>
+
+    <!-- North -> West : LEFT TURN -->
+    <route id="north_west"
+           edges="north_to_center center_to_west"/>
+
+
+    <!-- ========================= -->
+    <!-- SOUTH APPROACH -->
+    <!-- ========================= -->
+
+    <!-- South -> North : STRAIGHT -->
+    <route id="south_north"
+           edges="south_to_center center_to_north"/>
+
+    <!-- South -> West : RIGHT TURN -->
+    <route id="south_west"
+           edges="south_to_center center_to_west"/>
+
+    <!-- South -> East : LEFT TURN -->
+    <route id="south_east"
+           edges="south_to_center center_to_east"/>
+
+
+    <!-- ========================= -->
+    <!-- EAST APPROACH -->
+    <!-- ========================= -->
+
+    <!-- East -> West : STRAIGHT -->
+    <route id="east_west"
+           edges="east_to_center center_to_west"/>
+
+    <!-- East -> South : RIGHT TURN -->
+    <route id="east_south"
+           edges="east_to_center center_to_south"/>
+
+    <!-- East -> North : LEFT TURN -->
+    <route id="east_north"
+           edges="east_to_center center_to_north"/>
+
+
+    <!-- ========================= -->
+    <!-- WEST APPROACH -->
+    <!-- ========================= -->
+
+    <!-- West -> East : STRAIGHT -->
+    <route id="west_east"
+           edges="west_to_center center_to_east"/>
+
+    <!-- West -> North : RIGHT TURN -->
+    <route id="west_north"
+           edges="west_to_center center_to_north"/>
+
+    <!-- West -> South : LEFT TURN -->
+    <route id="west_south"
+           edges="west_to_center center_to_south"/>
+
+
+    <!-- ========================= -->
+    <!-- TRAFFIC FLOWS -->
+    <!-- ========================= -->
+
+    <!-- NORTH -->
+    <flow id="north_south_flow"
+          type="car"
+          route="north_south"
+          begin="0"
+          end="3600"
+          vehsPerHour="350"/>
+
+    <flow id="north_east_flow"
+          type="car"
+          route="north_east"
+          begin="0"
+          end="3600"
+          vehsPerHour="150"/>
+
+    <flow id="north_west_flow"
+          type="car"
+          route="north_west"
+          begin="0"
+          end="3600"
+          vehsPerHour="150"/>
+
+
+    <!-- SOUTH -->
+    <flow id="south_north_flow"
+          type="car"
+          route="south_north"
+          begin="0"
+          end="3600"
+          vehsPerHour="300"/>
+
+    <flow id="south_west_flow"
+          type="car"
+          route="south_west"
+          begin="0"
+          end="3600"
+          vehsPerHour="150"/>
+
+    <flow id="south_east_flow"
+          type="car"
+          route="south_east"
+          begin="0"
+          end="3600"
+          vehsPerHour="150"/>
+
+
+    <!-- EAST -->
+    <flow id="east_west_flow"
+          type="car"
+          route="east_west"
+          begin="0"
+          end="3600"
+          vehsPerHour="250"/>
+
+    <flow id="east_south_flow"
+          type="car"
+          route="east_south"
+          begin="0"
+          end="3600"
+          vehsPerHour="100"/>
+
+    <flow id="east_north_flow"
+          type="car"
+          route="east_north"
+          begin="0"
+          end="3600"
+          vehsPerHour="100"/>
+
+
+    <!-- WEST -->
+    <flow id="west_east_flow"
+          type="car"
+          route="west_east"
+          begin="0"
+          end="3600"
+          vehsPerHour="200"/>
+
+    <flow id="west_north_flow"
+          type="car"
+          begin="0"
+          end="3600"
+          vehsPerHour="100"
+          route="west_north"/>
+
+    <flow id="west_south_flow"
+          type="car"
+          begin="0"
+          end="3600"
+          vehsPerHour="100"
+          route="west_south"/>
+        
+        <!-- ========================= -->
+    <!-- EMERGENCY VEHICLE -->
+    <!-- ========================= -->
+
+    <vehicle id="emergency_north_01"
+             type="emergency"
+             route="north_south"
+             depart="120"
+             departLane="best"
+             departSpeed="max"/>
+
+
+</routes>

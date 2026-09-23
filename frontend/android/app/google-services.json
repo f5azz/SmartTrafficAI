@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "576897046653",
+    "project_id": "smarttrafficai-3b436",
+    "storage_bucket": "smarttrafficai-3b436.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576897046653:android:51ceae6b5701321bdc3914",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRO-aAulPBMxwzZ6Sb2zFaFcoNq31AwNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

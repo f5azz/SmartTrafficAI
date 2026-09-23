@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes>
+
+    <!-- Pedestrian type -->
+    <vType id="pedestrian"
+           vClass="pedestrian"
+           guiShape="pedestrian"
+           width="0.6"
+           length="0.5"
+           desiredMaxSpeed="1.4"/>
+
+
+    <!-- NORTH → SOUTH -->
+    <personFlow id="north_to_south_ped"
+                type="pedestrian"
+                begin="0"
+                end="600"
+                period="8"
+                departPos="random">
+
+        <walk from="north_to_center"
+              to="center_to_south"/>
+
+    </personFlow>
+
+
+    <!-- SOUTH → NORTH -->
+    <personFlow id="south_to_north_ped"
+                type="pedestrian"
+                begin="0"
+                end="600"
+                period="10"
+                departPos="random">
+
+        <walk from="south_to_center"
+              to="center_to_north"/>
+
+    </personFlow>
+
+
+    <!-- EAST → WEST -->
+    <personFlow id="east_to_west_ped"
+                type="pedestrian"
+                begin="0"
+                end="600"
+                period="9"
+                departPos="random">
+
+        <walk from="east_to_center"
+              to="center_to_west"/>
+
+    </personFlow>
+
+
+    <!-- WEST → EAST -->
+    <personFlow id="west_to_east_ped"
+                type="pedestrian"
+                begin="0"
+                end="600"
+                period="11"
+                departPos="random">
+
+        <walk from="west_to_center"
+              to="center_to_east"/>
+
+    </personFlow>
+
+</routes>
