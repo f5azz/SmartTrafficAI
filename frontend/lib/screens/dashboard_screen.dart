@@ -614,6 +614,77 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 
             // ------------------------------------------------
+            // SUMO SIMULATION DEMO
+            // ------------------------------------------------
+
+            _sectionHeader(
+              "SUMO Simulation Demo",
+              "Live intersection behavior powered by SUMO TraCI",
+              Icons.play_circle_fill,
+            ),
+
+            const SizedBox(height: 12),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                color: aiCyan.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: aiCyan.withOpacity(0.22),
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.sensors,
+                    color: aiCyan,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Demo status: SUMO is running and updating signal priority in real time.",
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.85),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: signalGreen.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Text(
+                      "LIVE",
+                      style: TextStyle(
+                        color: signalGreen,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 18),
+
+            _buildJudgeDemoCard(),
+
+            const SizedBox(height: 18),
+
+            // ------------------------------------------------
             // TRAFFIC OVERVIEW
             // ------------------------------------------------
 
@@ -737,6 +808,195 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+
+  // ==========================================================
+  // JUDGE DEMO CARD
+  // ==========================================================
+
+  Widget _buildJudgeDemoCard() {
+    final String activeSignal =
+        trafficData["active_signal"] ?? "UNKNOWN";
+
+    final String priority =
+        trafficData["priority_direction"] ?? "UNKNOWN";
+
+    final String trafficStatus =
+        trafficData["traffic_status"] ?? "UNKNOWN";
+
+    final int greenTime =
+        trafficData["green_time"] ?? 0;
+
+    final double simulationTime =
+        (trafficData["simulation_time"] ?? 0).toDouble();
+
+    final bool isGreen = activeSignal.toUpperCase().contains("NORTH") ||
+        activeSignal.toUpperCase().contains("EAST") ||
+        activeSignal.toUpperCase().contains("SOUTH") ||
+        activeSignal.toUpperCase().contains("WEST");
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: trafficPanel,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: signalGreen.withOpacity(0.22),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: signalGreen.withOpacity(0.10),
+            blurRadius: 18,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: (isGreen ? signalGreen : signalRed).withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  Icons.play_arrow_rounded,
+                  color: isGreen ? signalGreen : signalRed,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  "SUMO Demo",
+                  style: TextStyle(
+                    color: isGreen ? signalGreen : signalRed,
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: signalGreen.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Text(
+                  "LIVE",
+                  style: TextStyle(
+                    color: signalGreen,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            "Signal cycle: $activeSignal is active. Priority is $priority and traffic level is $trafficStatus.",
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 12,
+              height: 1.5,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: _miniDemoStat(
+                  "Signal",
+                  activeSignal,
+                  isGreen ? signalGreen : signalRed,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _miniDemoStat(
+                  "Green",
+                  "${greenTime}s",
+                  aiCyan,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _miniDemoStat(
+                  "Time",
+                  "${simulationTime.toStringAsFixed(1)}s",
+                  pedestrianPurple,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              const Icon(
+                Icons.lightbulb_outline,
+                color: signalYellow,
+                size: 16,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Demo script: traffic rises → signal priority switches → adaptive timing updates.",
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.7),
+                  fontSize: 11,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _miniDemoStat(
+    String title,
+    String value,
+    Color color,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: color.withOpacity(0.25),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white38,
+              fontSize: 9,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: TextStyle(
+              color: color,
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   // ==========================================================
   // SECTION HEADER
@@ -1188,12 +1448,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
               const SizedBox(width: 10),
 
-              const Text(
-                "Live Intersection",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
+              const Expanded(
+                child: Text(
+                  "SUMO Live Demo",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: aiCyan.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Text(
+                  "TraCI",
+                  style: TextStyle(
+                    color: aiCyan,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
